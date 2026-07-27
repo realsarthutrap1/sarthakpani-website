@@ -279,4 +279,25 @@ export const books: Book[] = [
     cover: "/books/covers/8630555.webp",
     sourceUrl: "https://openlibrary.org/works/OL16816775W",
   },
+  {
+    title: "Norwegian Wood",
+    author: "Haruki Murakami",
+    status: "read",
+    cover: "/books/covers/14853522.webp",
+    sourceUrl: "https://openlibrary.org/works/OL2625457W",
+  },
+  {
+    title: "The Personal MBA",
+    author: "Josh Kaufman",
+    status: "read",
+    cover: "/books/covers/6713257.webp",
+    sourceUrl: "https://openlibrary.org/works/OL15473892W",
+  },
+  {
+    title: "Rich Dad Poor Dad",
+    author: "Robert T. Kiyosaki",
+    status: "read",
+    cover: "/books/covers/8315603.webp",
+    sourceUrl: "https://openlibrary.org/works/OL2010879W",
+  },
 ];
