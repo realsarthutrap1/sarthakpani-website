@@ -37,18 +37,14 @@ export default function AboutPage() {
             </div>
           </dl>
           <div className="about-copy">
+            <p>I build software, hardware, and occasionally better questions.</p>
             <p>
-              I build technology, study physics, and write about the questions that connect
-              engineering, evidence, and the physical world.
+              I’m currently studying physics, co-founding Elev, experimenting with computer vision
+              and embedded systems, and collecting books that change how I think.
             </p>
             <p>
-              I co-founded Elev to help mission-driven organizations collect stronger evidence
-              from everyday work. I have also built embedded, networking, and computer-vision
-              prototypes that connect software to real systems.
-            </p>
-            <p>
-              This site is my public notebook: reviewed essays, books worth remembering, and
-              honest records of what I am learning.
+              This is not a polished biography. It is a record of the things I’m trying to
+              understand.
             </p>
           </div>
         </div>

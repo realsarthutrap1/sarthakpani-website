@@ -963,10 +963,6 @@ a {
     gap: 24px;
   }
 
-  .site-footer {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .books-intro-copy {
     max-width: 32rem;
   }
@@ -974,11 +970,6 @@ a {
   .book-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap-block: 42px;
-  }
-
-  .footer-group + .footer-group {
-    border-left: 0.5px solid var(--muted);
-    padding-left: 18px;
   }
 
   .footer-copyright {

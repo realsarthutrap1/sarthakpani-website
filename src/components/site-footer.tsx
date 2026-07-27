@@ -5,12 +5,6 @@ export function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="footer-group">
-        <span className="footer-label">/ Contact</span>
-        <div className="footer-links">
-          <a href={`mailto:${siteConfig.email}`}>Email</a>
-        </div>
-      </div>
-      <div className="footer-group">
         <span className="footer-label">/ Links</span>
         <div className="footer-links">
           <Link href="/blog">Blog</Link>
@@ -22,7 +16,6 @@ export function SiteFooter() {
       </div>
       <div className="footer-copyright">
         <span>© {new Date().getFullYear()} {siteConfig.name}</span>
-        <span>California / Web</span>
       </div>
     </footer>
   );
