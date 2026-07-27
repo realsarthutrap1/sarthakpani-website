@@ -14,10 +14,10 @@ export default function AboutPage() {
     <main>
       <PageIntro
         label="About"
-        title="Founder, engineer, and student of difficult systems."
-        description="I am building at the intersection of artificial intelligence, public benefit, embedded engineering, and physics."
+        title="A little about me."
+        description="I am a founder, engineer, and physics student interested in useful technology and hard questions."
       />
-      <section className="section-shell grid gap-12 border-t border-line md:grid-cols-[0.8fr_1.2fr] md:gap-16 lg:gap-24">
+      <section className="page-shell content-section grid gap-12 md:grid-cols-[0.8fr_1.2fr] md:gap-16 lg:gap-24">
         <div className="relative min-h-[520px] overflow-hidden rounded-2xl bg-surface md:min-h-[700px]">
           <Image
             src="/images/sarthak-pani.jpg"

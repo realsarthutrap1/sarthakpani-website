@@ -14,14 +14,14 @@ export default function ProjectsPage() {
   return (
     <main>
       <PageIntro
-        label="Selected work"
-        title="Systems built across software and the physical world."
-        description="A working archive of products, engineering prototypes, and experiments that connect evidence, intelligence, and real-world feedback."
+        label="Projects"
+        title="Things I have built."
+        description="Products and experiments across AI, evidence systems, and computer vision."
       />
-      <section className="section-shell border-t border-line">
-        <div className="space-y-20 lg:space-y-28">
-          {projects.map((project, index) => (
-            <ProjectFeature key={project.slug} project={project} reverse={index % 2 === 1} />
+      <section className="page-shell content-section">
+        <div>
+          {projects.map((project) => (
+            <ProjectFeature headingLevel="h2" key={project.slug} project={project} />
           ))}
         </div>
       </section>

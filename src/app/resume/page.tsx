@@ -12,13 +12,13 @@ export default function ResumePage() {
     <main>
       <PageIntro
         label="Resume"
-        title="Work, education, engineering, and leadership."
-        description="A concise record of the experiences and projects behind the work shown on this site."
+        title="Experience and work."
+        description="A concise record of my education, projects, engineering, and leadership."
       />
-      <section className="section-shell border-t border-line">
+      <section className="page-shell content-section">
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
           <div>
-            <h2 className="editorial-heading">A web-safe copy, ready to share.</h2>
+            <h2 className="editorial-heading">Download my resume.</h2>
             <div className="mt-8 flex flex-wrap gap-3">
               <a className="button button-primary" download href="/resume/sarthak-pani-resume.pdf">
                 Download PDF

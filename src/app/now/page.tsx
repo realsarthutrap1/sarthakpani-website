@@ -12,10 +12,10 @@ export default function NowPage() {
     <main>
       <PageIntro
         label="Now"
-        title="The work currently earning my attention."
-        description="A short, public snapshot of what I am building, studying, and exploring right now."
+        title="What I am doing now."
+        description="A short snapshot of what I am building, studying, and exploring."
       />
-      <section className="section-shell border-t border-line">
+      <section className="page-shell content-section">
         <div className="max-w-5xl">
           {focusItems.map((item) => (
             <article className="grid gap-4 border-b border-line py-9 first:pt-0 md:grid-cols-[0.34fr_0.66fr]" key={item.title}>

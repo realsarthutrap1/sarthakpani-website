@@ -3,24 +3,24 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --paper: #f2f4f1;
-  --surface: #e9ece8;
-  --ink: #101411;
-  --muted: #5a625c;
-  --line: #cdd2ce;
-  --accent: #1b7f54;
-  --accent-contrast: #f4fff8;
+  --paper: #f5f7f5;
+  --surface: #e9eeea;
+  --ink: #101612;
+  --muted: #58625b;
+  --line: #d2d9d4;
+  --accent: #24724b;
+  --accent-contrast: #f5fff8;
   color-scheme: light;
 }
 
 .dark {
-  --paper: #0e1210;
-  --surface: #171c19;
-  --ink: #eef2ee;
-  --muted: #a7b0aa;
-  --line: #303733;
-  --accent: #54b783;
-  --accent-contrast: #0e1210;
+  --paper: #0b100d;
+  --surface: #151c17;
+  --ink: #edf3ee;
+  --muted: #a5afa8;
+  --line: #2d3730;
+  --accent: #67c890;
+  --accent-contrast: #08100b;
   color-scheme: dark;
 }
 
@@ -33,7 +33,6 @@
   --color-accent: var(--accent);
   --font-sans: var(--font-geist);
   --font-mono: var(--font-geist-mono);
-  --font-serif: var(--font-newsreader);
 }
 
 * {
@@ -55,7 +54,7 @@ body {
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--accent) 28%, transparent);
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
 }
 
 a,
@@ -65,7 +64,7 @@ button {
 
 a:focus-visible,
 button:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--accent) 70%, transparent);
+  outline: 3px solid color-mix(in srgb, var(--accent) 72%, transparent);
   outline-offset: 4px;
 }
 
@@ -87,47 +86,173 @@ button:focus-visible {
   transform: translateY(0);
 }
 
+.page-shell,
 .section-shell {
-  width: min(100% - 2.5rem, 1310px);
+  width: min(100% - 2.5rem, 1180px);
   margin-inline: auto;
-  padding-block: clamp(5rem, 10vw, 9rem);
+}
+
+.section-shell {
+  padding-block: clamp(4.5rem, 9vw, 8rem);
+}
+
+.content-section {
+  border-top: 1px solid var(--line);
+  padding-block: clamp(4.5rem, 8vw, 7rem);
+}
+
+.section-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.section-heading h2 {
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.hero-kicker {
+  color: rgb(143 222 173 / 0.84);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.hero-link {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  border: 1px solid rgb(103 200 144 / 0.52);
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  color: rgb(255 255 255 / 0.9);
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+
+.hero-link:hover {
+  border-color: rgb(126 221 164 / 0.9);
+  background: rgb(255 255 255 / 0.08);
+}
+
+.hero-link:active,
+.button:active {
+  transform: translateY(1px) scale(0.985);
+}
+
+.simple-link {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent) 42%, transparent);
+  text-underline-offset: 0.32rem;
+  transition: color 160ms ease, text-decoration-color 160ms ease;
+}
+
+.simple-link:hover {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+.index-row,
+.project-row {
+  display: grid;
+  gap: 1rem;
+  border-top: 1px solid var(--line);
+  padding-block: 1.65rem;
+  transition: color 160ms ease;
+}
+
+.index-row {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.index-row h3,
+.project-row h2,
+.project-row h3 {
+  font-size: clamp(1.55rem, 3vw, 2.25rem);
+  font-weight: 520;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.index-row p,
+.project-row p {
+  max-width: 60ch;
+  margin-top: 0.55rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.index-row time {
+  padding-top: 0.35rem;
+  color: var(--muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+.project-row {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.project-row:hover h2,
+.project-row:hover h3,
+.index-row:hover h3 {
+  color: var(--accent);
+}
+
+.project-arrow {
+  color: var(--muted);
+  transition: color 160ms ease, transform 160ms ease;
+}
+
+.project-row:hover .project-arrow {
+  color: var(--accent);
+  transform: translate(2px, -2px);
 }
 
 .editorial-heading {
   max-width: 19ch;
-  font-family: var(--font-newsreader), serif;
-  font-size: clamp(2.6rem, 5vw, 4.9rem);
-  font-weight: 440;
+  font-size: clamp(2.4rem, 5vw, 4.5rem);
+  font-weight: 500;
   line-height: 0.98;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.05em;
 }
 
 .eyebrow {
   color: var(--accent);
   font-family: var(--font-geist-mono), monospace;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .button {
   display: inline-flex;
-  min-height: 2.9rem;
+  min-height: 2.75rem;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   border-radius: 999px;
-  padding: 0.7rem 1.15rem;
-  font-size: 0.92rem;
+  padding: 0.68rem 1rem;
+  font-size: 0.88rem;
   font-weight: 650;
   line-height: 1;
-  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
   white-space: nowrap;
-}
-
-.button:active {
-  transform: translateY(1px) scale(0.985);
+  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
 }
 
 .button-primary {
@@ -153,12 +278,12 @@ button:focus-visible {
   align-items: center;
   gap: 0.4rem;
   color: var(--ink);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 650;
   text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, var(--accent) 55%, transparent);
-  text-underline-offset: 0.35rem;
-  transition: color 180ms ease;
+  text-decoration-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  text-underline-offset: 0.32rem;
+  transition: color 160ms ease;
 }
 
 .text-link:hover {
@@ -167,26 +292,25 @@ button:focus-visible {
 
 .prose {
   color: var(--ink);
-  font-size: 1.08rem;
-  line-height: 1.82;
+  font-size: 1.05rem;
+  line-height: 1.8;
 }
 
 .prose > * + * {
-  margin-top: 1.5rem;
+  margin-top: 1.4rem;
 }
 
 .prose h2 {
-  margin-top: 3.8rem;
-  font-family: var(--font-newsreader), serif;
-  font-size: clamp(2rem, 4vw, 3.25rem);
-  font-weight: 460;
-  line-height: 1.02;
-  letter-spacing: -0.035em;
+  margin-top: 3.4rem;
+  font-size: clamp(1.8rem, 4vw, 2.75rem);
+  font-weight: 540;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
 }
 
 .prose h3 {
-  margin-top: 2.5rem;
-  font-size: 1.4rem;
+  margin-top: 2.4rem;
+  font-size: 1.35rem;
   font-weight: 650;
   letter-spacing: -0.02em;
 }
@@ -199,25 +323,24 @@ button:focus-visible {
 }
 
 .prose ul {
-  padding-left: 1.35rem;
+  padding-left: 1.3rem;
   list-style: disc;
 }
 
 .prose li + li {
-  margin-top: 0.55rem;
+  margin-top: 0.5rem;
 }
 
 .prose blockquote {
-  border-left: 3px solid var(--accent);
-  padding-left: 1.25rem;
+  border-left: 2px solid var(--accent);
+  padding-left: 1.1rem;
   color: var(--muted);
-  font-family: var(--font-newsreader), serif;
-  font-size: 1.35rem;
-  line-height: 1.55;
+  font-size: 1.2rem;
+  line-height: 1.6;
 }
 
 .prose code {
-  border-radius: 0.35rem;
+  border-radius: 0.3rem;
   background: var(--surface);
   padding: 0.12rem 0.35rem;
   font-family: var(--font-geist-mono), monospace;
@@ -225,9 +348,22 @@ button:focus-visible {
 }
 
 @media (max-width: 767px) {
+  .page-shell,
   .section-shell {
-    width: min(100% - 2rem, 1310px);
+    width: min(100% - 2rem, 1180px);
+  }
+
+  .section-shell {
     padding-block: 4.5rem;
+  }
+
+  .index-row {
+    grid-template-columns: 1fr;
+  }
+
+  .index-row time {
+    order: -1;
+    padding-top: 0;
   }
 }
 

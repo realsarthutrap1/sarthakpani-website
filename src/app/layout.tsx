@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Newsreader } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SiteHeader } from "@/components/site-header";
@@ -15,12 +15,6 @@ const geist = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const newsreader = Newsreader({
-  variable: "--font-newsreader",
   subsets: ["latin"],
   display: "swap",
 });
@@ -53,9 +47,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
+      data-scroll-behavior="smooth"
       lang="en"
       suppressHydrationWarning
-      className={`${geist.variable} ${geistMono.variable} ${newsreader.variable}`}
+      className={`${geist.variable} ${geistMono.variable}`}
     >
       <body>
         <ThemeProvider>

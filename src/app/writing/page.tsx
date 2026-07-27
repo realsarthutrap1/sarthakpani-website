@@ -16,10 +16,10 @@ export default function WritingPage() {
     <main>
       <PageIntro
         label="Writing"
-        title="Notes from building and learning."
-        description="Essays about engineering judgment, entrepreneurship, scientific curiosity, and the ideas that connect them."
+        title="Notes on what I am building and learning."
+        description="Writing about engineering, startups, physics, books, and the ideas connecting them."
       />
-      <section className="section-shell border-t border-line">
+      <section className="page-shell content-section">
         {posts.length ? (
           <div className="max-w-5xl">
             {posts.map((post) => (
