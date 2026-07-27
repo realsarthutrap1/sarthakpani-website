@@ -15,10 +15,10 @@ export default function BooksPage() {
 
       <section className="books-intro" aria-label="Personal reading shelf">
         <div className="books-intro-copy">
-          <span className="table-label">/ Personal shelf</span>
+          <span className="table-label">/ Shelf notes</span>
           <p>
-            Books I have finished and kept close, across fiction, philosophy,
-            science, economics, and company building.
+            Books I finished, dog-eared, argued with, and kept thinking about
+            after the last page.
           </p>
         </div>
       </section>
