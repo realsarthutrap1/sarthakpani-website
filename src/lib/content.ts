@@ -38,6 +38,15 @@ function publishedDate(data: Record<string, unknown>, file: string) {
   return value;
 }
 
+function postOrder(data: Record<string, unknown>, file: string) {
+  const value = data.order;
+  if (value === undefined) return 0;
+  if (typeof value !== "number" || !Number.isInteger(value) || value < 1) {
+    throw new Error(`${file}: frontmatter "order" must be a positive integer`);
+  }
+  return value;
+}
+
 export function getPosts(): PostMeta[] {
   return filesIn("blog")
     .map((file) => {
@@ -52,10 +61,11 @@ export function getPosts(): PostMeta[] {
         author: requiredString(record, "author", file),
         topics: stringArray(record, "topics", file),
         draft: record.draft === true,
+        order: postOrder(record, file),
       };
     })
     .filter((post) => !post.draft)
-    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+    .sort((a, b) => a.order - b.order || b.publishedAt.localeCompare(a.publishedAt));
 }
 
 export function getContentFile(directory: "blog", slug: string) {

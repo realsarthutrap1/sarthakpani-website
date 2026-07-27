@@ -6,6 +6,7 @@ export type PostMeta = {
   author: string;
   topics: string[];
   draft: boolean;
+  order?: number;
 };
 
 export type Book = {
