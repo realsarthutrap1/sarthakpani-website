@@ -53,6 +53,7 @@ export function getPosts(): PostMeta[] {
       const slug = file.replace(/\.mdx$/, "");
       const { data } = matter.read(path.join(contentRoot, "blog", file));
       const record = data as Record<string, unknown>;
+      const order = postOrder(record, file);
       return {
         slug,
         title: requiredString(record, "title", file),
@@ -61,7 +62,8 @@ export function getPosts(): PostMeta[] {
         author: requiredString(record, "author", file),
         topics: stringArray(record, "topics", file),
         draft: record.draft === true,
-        order: postOrder(record, file),
+        order,
+        live: order <= 2,
       };
     })
     .filter((post) => !post.draft)

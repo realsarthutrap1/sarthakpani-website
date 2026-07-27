@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${siteConfig.url}${route}`,
       lastModified: new Date("2026-07-26"),
     })),
-    ...getPosts().map((post) => ({
+    ...getPosts().filter((post) => post.live).map((post) => ({
       url: `${siteConfig.url}/blog/${post.slug}`,
       lastModified: new Date(post.publishedAt),
     })),

@@ -28,16 +28,38 @@ export function BlogFeed({
           {posts.map((post) => {
             const open = expanded === post.slug;
             const detailsId = `details-${post.slug}`;
+            const rowContent = (
+              <>
+                <span className="blog-date">
+                  <span aria-hidden className="date-square" />
+                  <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
+                </span>
+                <span className="blog-row-title">
+                  {post.title}
+                  {!post.live ? <span className="coming-soon-hint">501 / Coming soon</span> : null}
+                </span>
+              </>
+            );
             return (
-              <li className={`blog-row${open ? " is-open" : ""}`} key={post.slug}>
+              <li
+                className={`blog-row${open ? " is-open" : ""}${post.live ? "" : " is-coming-soon"}`}
+                key={post.slug}
+              >
                 <div className="blog-row-visible">
-                  <Link className="blog-row-link" href={`/blog/${post.slug}`}>
-                    <span className="blog-date">
-                      <span aria-hidden className="date-square" />
-                      <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
-                    </span>
-                    <span className="blog-row-title">{post.title}</span>
-                  </Link>
+                  {post.live ? (
+                    <Link className="blog-row-link" href={`/blog/${post.slug}`}>{rowContent}</Link>
+                  ) : (
+                    <button
+                      aria-controls={detailsId}
+                      aria-expanded={open}
+                      aria-label={`${post.title}. Coming soon`}
+                      className="blog-row-link blog-row-trigger"
+                      onClick={() => onExpand(open ? null : post.slug)}
+                      type="button"
+                    >
+                      {rowContent}
+                    </button>
+                  )}
                   <button
                     aria-controls={detailsId}
                     aria-expanded={open}
@@ -50,25 +72,37 @@ export function BlogFeed({
                   </button>
                 </div>
                 {open ? (
-                  <div className="blog-details" id={detailsId}>
-                    <div className="detail-group">
-                      <span className="detail-label">Summary:</span>
-                      <p className="detail-value">{post.description}</p>
+                  post.live ? (
+                    <div className="blog-details" id={detailsId}>
+                      <div className="detail-group">
+                        <span className="detail-label">Summary:</span>
+                        <p className="detail-value">{post.description}</p>
+                      </div>
+                      <div className="detail-group">
+                        <span className="detail-label">Author:</span>
+                        <p className="detail-value">{post.author}</p>
+                      </div>
+                      <div className="detail-group">
+                        <span className="detail-label">Topics:</span>
+                        <ul className="topic-tags">
+                          {post.topics.map((topic) => (
+                            <li className="topic-tag" key={topic}>{topic}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <Link className="read-link" href={`/blog/${post.slug}`}>Read</Link>
                     </div>
-                    <div className="detail-group">
-                      <span className="detail-label">Author:</span>
-                      <p className="detail-value">{post.author}</p>
+                  ) : (
+                    <div className="blog-details blog-coming-soon" id={detailsId} role="status">
+                      <span className="coming-soon-code">501</span>
+                      <div>
+                        <span className="detail-label">/ Not implemented</span>
+                        <p className="detail-value">
+                          Coming soon. This essay is not ready to read yet. Come back later.
+                        </p>
+                      </div>
                     </div>
-                    <div className="detail-group">
-                      <span className="detail-label">Topics:</span>
-                      <ul className="topic-tags">
-                        {post.topics.map((topic) => (
-                          <li className="topic-tag" key={topic}>{topic}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    <Link className="read-link" href={`/blog/${post.slug}`}>Read</Link>
-                  </div>
+                  )
                 ) : null}
               </li>
             );

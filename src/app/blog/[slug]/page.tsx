@@ -23,8 +23,9 @@ export async function generateMetadata({
   if (!post) return {};
   return {
     title: post.title,
-    description: post.description,
+    description: post.live ? post.description : "Coming soon. This essay is not ready yet.",
     alternates: { canonical: `/blog/${slug}` },
+    robots: post.live ? undefined : { index: false, follow: false },
   };
 }
 
@@ -33,6 +34,17 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
   const post = getPosts().find((item) => item.slug === slug);
   const file = getContentFile("blog", slug);
   if (!post || !file || post.draft) notFound();
+  if (!post.live) {
+    return (
+      <main className="not-found">
+        <div>
+          <h1>501</h1>
+          <p>/ Coming soon. This essay is not ready to read yet. Come back later.</p>
+          <Link className="read-link" href="/blog">Return to blog</Link>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main>
