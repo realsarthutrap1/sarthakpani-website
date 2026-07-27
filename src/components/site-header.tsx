@@ -14,7 +14,7 @@ export function SiteHeader() {
 
   return (
     <nav aria-label="Primary" className="site-header">
-      <Link aria-label="Sarthak Pani blog home" className="site-mark" href="/blog">SP</Link>
+      <Link aria-label="SP, Sarthak Pani blog home" className="site-mark" href="/blog">SP</Link>
       {links.map(([label, href, hotkey]) => {
         const active = pathname === href || pathname.startsWith(`${href}/`);
         return (

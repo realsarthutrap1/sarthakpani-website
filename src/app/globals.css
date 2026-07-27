@@ -554,6 +554,133 @@ a {
   font-weight: 300;
 }
 
+.books-intro {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 12px;
+  align-items: start;
+  padding-top: 24px;
+}
+
+.books-intro-copy {
+  display: grid;
+  grid-column: 1 / -1;
+  gap: 18px;
+}
+
+.books-intro-copy p {
+  max-width: 26ch;
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-newsreader), Georgia, serif;
+  font-size: clamp(22px, 2.1vw, 34px);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.books-intro-photo {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  border-radius: 2px;
+  background: var(--nav);
+}
+
+.books-intro-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.books-intro-photo-stack {
+  grid-column: 1 / 4;
+  aspect-ratio: 3 / 5;
+}
+
+.books-intro-photo-table {
+  grid-column: 4 / -1;
+  aspect-ratio: 4 / 3;
+}
+
+.books-library {
+  grid-column: 1 / -1;
+  padding-top: 72px;
+}
+
+.books-library-header {
+  justify-content: space-between;
+}
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px 12px;
+  margin: 0;
+  padding: 18px 0 0;
+  list-style: none;
+}
+
+.book-card {
+  display: grid;
+  gap: 7px;
+  align-content: start;
+}
+
+.book-cover {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 2 / 3;
+  border: 0.5px solid color-mix(in srgb, var(--muted) 55%, transparent);
+  border-radius: 2px;
+  background: var(--nav);
+  transition:
+    box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.book-cover-image {
+  object-fit: contain;
+}
+
+.book-cover-image.is-shelf-crop {
+  object-fit: cover;
+}
+
+.book-title {
+  color: var(--ink);
+  font-family: var(--font-newsreader), Georgia, serif;
+  font-size: clamp(18px, 1.45vw, 23px);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  transition: color 150ms linear;
+}
+
+.book-author {
+  color: var(--muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.books-source {
+  margin: 42px 0 0;
+  color: var(--muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.books-source a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
 .about-content {
   display: grid;
   grid-column: 1 / -1;
@@ -867,6 +994,30 @@ a {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .books-intro {
+    grid-template-columns: repeat(16, minmax(0, 1fr));
+    gap: 18px 12px;
+    padding-top: 42px;
+  }
+
+  .books-intro-copy {
+    grid-column: 1 / 5;
+  }
+
+  .books-intro-photo-stack {
+    grid-column: 5 / 10;
+  }
+
+  .books-intro-photo-table {
+    grid-column: 10 / 17;
+    align-self: end;
+  }
+
+  .book-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap-block: 42px;
+  }
+
   .footer-group + .footer-group {
     border-left: 0.5px solid var(--muted);
     padding-left: 18px;
@@ -951,6 +1102,28 @@ a {
     grid-column: 6 / 25;
   }
 
+  .books-intro {
+    grid-template-columns: repeat(24, minmax(0, 1fr));
+    gap: 24px 12px;
+    padding-top: 56px;
+  }
+
+  .books-intro-copy {
+    grid-column: 1 / 6;
+  }
+
+  .books-intro-photo-stack {
+    grid-column: 6 / 13;
+  }
+
+  .books-intro-photo-table {
+    grid-column: 13 / 25;
+  }
+
+  .books-library {
+    padding-top: 112px;
+  }
+
   .article-header {
     display: grid;
   }
@@ -1015,6 +1188,12 @@ a {
   }
 }
 
+@media (min-width: 1200px) {
+  .book-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
 @media (pointer: fine) {
   html,
   body,
@@ -1040,6 +1219,114 @@ a {
 
   .footer-links a:hover {
     transform: translateY(-2px);
+  }
+
+  .book-card:hover .book-cover {
+    transform: translateY(-7px) rotate(-0.75deg);
+    box-shadow: 0 16px 28px rgb(44 92 197 / 0.12);
+  }
+
+  .book-grid li:nth-child(even) .book-card:hover .book-cover {
+    transform: translateY(-7px) rotate(0.75deg);
+  }
+
+  .book-card:hover .book-title {
+    color: var(--accent);
+  }
+}
+
+.pointer-crosshair {
+  display: none;
+}
+
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: none !important;
+  }
+
+  .pointer-crosshair {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 30;
+    display: block;
+    width: 34px;
+    height: 34px;
+    pointer-events: none;
+    color: var(--accent);
+    opacity: 0;
+    transition: opacity 100ms linear;
+    will-change: transform;
+  }
+
+  .pointer-crosshair.is-visible {
+    opacity: 1;
+  }
+
+  .pointer-crosshair-shape {
+    position: absolute;
+    inset: 0;
+    transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .pointer-crosshair-shape::before,
+  .pointer-crosshair-shape::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: currentColor;
+    content: "";
+  }
+
+  .pointer-crosshair-shape::before {
+    width: 100%;
+    height: 1px;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(
+      90deg,
+      currentColor 0 34%,
+      transparent 34% 66%,
+      currentColor 66% 100%
+    );
+  }
+
+  .pointer-crosshair-shape::after {
+    width: 1px;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(
+      180deg,
+      currentColor 0 34%,
+      transparent 34% 66%,
+      currentColor 66% 100%
+    );
+  }
+
+  .pointer-crosshair-core {
+    position: absolute;
+    inset: 12px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    background: var(--page);
+    transition:
+      background-color 150ms linear,
+      border-radius 150ms linear,
+      transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .pointer-crosshair.is-interactive .pointer-crosshair-shape {
+    transform: rotate(45deg) scale(1.15);
+  }
+
+  .pointer-crosshair.is-interactive .pointer-crosshair-core {
+    border-radius: 2px;
+    background: var(--accent);
+    transform: rotate(45deg) scale(0.55);
+  }
+
+  .pointer-crosshair.is-down .pointer-crosshair-shape {
+    transform: rotate(45deg) scale(0.76);
   }
 }
 
@@ -1079,6 +1366,15 @@ a {
 
   .directory-content:not([hidden]) {
     animation: motion-enter 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .books-intro-copy,
+  .books-intro-photo {
+    animation: motion-enter 650ms 120ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .books-intro-photo-table {
+    animation-delay: 220ms;
   }
 }
 

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Newsreader } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { PointerCrosshair } from "@/components/pointer-crosshair";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -59,6 +60,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     >
       <body>
         <a className="skip-link" href="#main-content">Skip to content</a>
+        <PointerCrosshair />
         <SiteHeader />
         <div id="main-content">{children}</div>
         <SiteFooter />

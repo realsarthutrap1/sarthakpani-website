@@ -12,6 +12,10 @@ export type Book = {
   title: string;
   author: string;
   status: "reading" | "read" | "paused";
+  cover: string;
+  sourceUrl: string;
+  coverPosition?: string;
+  coverScale?: number;
   rating?: number;
   finishedAt?: string;
   note?: string;
