@@ -1,11 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
-import type { PostMeta, ProjectLink, ProjectMeta } from "@/lib/types";
+import type { PostMeta } from "@/lib/types";
 
 const contentRoot = path.join(process.cwd(), "content");
 
-function filesIn(directory: "projects" | "writing") {
+function filesIn(directory: "blog") {
   const target = path.join(contentRoot, directory);
   return fs.existsSync(target) ? fs.readdirSync(target).filter((file) => file.endsWith(".mdx")) : [];
 }
@@ -20,65 +20,37 @@ function requiredString(data: Record<string, unknown>, key: string, file: string
 
 function stringArray(data: Record<string, unknown>, key: string, file: string) {
   const value = data[key];
-  if (!Array.isArray(value) || value.some((item) => typeof item !== "string")) {
-    throw new Error(`${file}: frontmatter "${key}" must be a string array`);
-  }
-  return value as string[];
-}
-
-function projectLinks(data: Record<string, unknown>, file: string): ProjectLink[] {
-  if (data.links === undefined) return [];
   if (
-    !Array.isArray(data.links) ||
-    data.links.some(
-      (item) =>
-        typeof item !== "object" ||
-        item === null ||
-        typeof (item as Record<string, unknown>).label !== "string" ||
-        typeof (item as Record<string, unknown>).href !== "string",
-    )
+    !Array.isArray(value) ||
+    value.length === 0 ||
+    value.some((item) => typeof item !== "string" || !item.trim())
   ) {
-    throw new Error(`${file}: frontmatter "links" must contain label and href strings`);
+    throw new Error(`${file}: frontmatter "${key}" must be a non-empty string array`);
   }
-  return data.links as ProjectLink[];
+  return (value as string[]).map((item) => item.trim());
 }
 
-export function getProjects(): ProjectMeta[] {
-  return filesIn("projects")
-    .map((file) => {
-      const slug = file.replace(/\.mdx$/, "");
-      const { data } = matter.read(path.join(contentRoot, "projects", file));
-      const record = data as Record<string, unknown>;
-      return {
-        slug,
-        title: requiredString(record, "title", file),
-        summary: requiredString(record, "summary", file),
-        year: requiredString(record, "year", file),
-        status: requiredString(record, "status", file),
-        tags: stringArray(record, "tags", file),
-        cover: requiredString(record, "cover", file),
-        coverAlt: requiredString(record, "coverAlt", file),
-        featured: record.featured === true,
-        draft: record.draft === true,
-        links: projectLinks(record, file),
-      };
-    })
-    .filter((project) => !project.draft)
-    .sort((a, b) => b.year.localeCompare(a.year));
+function publishedDate(data: Record<string, unknown>, file: string) {
+  const value = requiredString(data, "publishedAt", file);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value) || Number.isNaN(Date.parse(`${value}T00:00:00Z`))) {
+    throw new Error(`${file}: frontmatter "publishedAt" must be a valid YYYY-MM-DD date`);
+  }
+  return value;
 }
 
 export function getPosts(): PostMeta[] {
-  return filesIn("writing")
+  return filesIn("blog")
     .map((file) => {
       const slug = file.replace(/\.mdx$/, "");
-      const { data } = matter.read(path.join(contentRoot, "writing", file));
+      const { data } = matter.read(path.join(contentRoot, "blog", file));
       const record = data as Record<string, unknown>;
       return {
         slug,
         title: requiredString(record, "title", file),
         description: requiredString(record, "description", file),
-        publishedAt: requiredString(record, "publishedAt", file),
-        cover: typeof record.cover === "string" ? record.cover : undefined,
+        publishedAt: publishedDate(record, file),
+        author: requiredString(record, "author", file),
+        topics: stringArray(record, "topics", file),
         draft: record.draft === true,
       };
     })
@@ -86,7 +58,7 @@ export function getPosts(): PostMeta[] {
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 }
 
-export function getContentFile(directory: "projects" | "writing", slug: string) {
+export function getContentFile(directory: "blog", slug: string) {
   if (!/^[a-z0-9-]+$/.test(slug)) return null;
   const file = path.join(contentRoot, directory, `${slug}.mdx`);
   if (!fs.existsSync(file)) return null;

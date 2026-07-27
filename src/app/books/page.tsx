@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PageIntro } from "@/components/page-intro";
+import { SectionTitle } from "@/components/section-title";
 import { books } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -9,33 +9,39 @@ export const metadata: Metadata = {
 
 export default function BooksPage() {
   return (
-    <main>
-      <PageIntro
-        label="Books"
-        title="What I am reading."
-        description="A simple log of books, notes, and ideas I want to remember."
-      />
-      <section className="page-shell content-section">
-        {books.length ? (
-          <div className="grid gap-x-10 gap-y-14 sm:grid-cols-2">
-            {books.map((book) => (
-              <article key={`${book.title}-${book.author}`}>
-                <p className="font-mono text-xs text-accent">{book.status}</p>
-                <h2 className="mt-4 text-3xl font-medium tracking-[-0.035em]">{book.title}</h2>
-                <p className="mt-2 text-muted">{book.author}</p>
-                {book.note ? <p className="mt-5 max-w-[52ch] leading-7 text-muted">{book.note}</p> : null}
-              </article>
-            ))}
+    <main className="site-grid">
+      <SectionTitle count={books.length} title="Books" />
+      <section className="blog-explorer" aria-label="Reading log">
+        <aside className="about-index">
+          <div className="filter-block">
+            <div className="table-label"><span>/</span> Reading log</div>
           </div>
-        ) : (
-          <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr]">
-            <h2 className="editorial-heading">The reading log is coming soon.</h2>
-            <p className="max-w-[58ch] self-end text-lg leading-8 text-muted">
-              I am organizing my notes and will add the first books here once
-              they are ready to share.
-            </p>
+        </aside>
+        <div className="blog-feed">
+          <div className="article-header table-label" aria-hidden>
+            <span className="date-label">/ Status</span>
+            <span className="name-label">/ Name</span>
           </div>
-        )}
+          {books.length ? (
+            <ul className="blog-list">
+              {books.map((book) => (
+                <li className="blog-row" key={`${book.title}-${book.author}`}>
+                  <div className="blog-row-visible">
+                    <div className="blog-row-link">
+                      <span className="blog-date">
+                        <span aria-hidden className="date-square" />
+                        {book.status}
+                      </span>
+                      <span className="blog-row-title">{book.title} — {book.author}</span>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="empty-row">Reading notes will appear here after review.</p>
+          )}
+        </div>
       </section>
     </main>
   );

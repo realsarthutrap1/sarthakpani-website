@@ -17,7 +17,7 @@ const components = {
 
 export function MdxContent({ source }: { source: string }) {
   return (
-    <div className="prose">
+    <div className="article-prose">
       <MDXRemote source={source} components={components} />
     </div>
   );

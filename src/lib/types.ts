@@ -1,28 +1,10 @@
-export type ProjectLink = {
-  label: string;
-  href: string;
-};
-
-export type ProjectMeta = {
-  slug: string;
-  title: string;
-  summary: string;
-  year: string;
-  status: string;
-  tags: string[];
-  cover: string;
-  coverAlt: string;
-  featured: boolean;
-  draft: boolean;
-  links: ProjectLink[];
-};
-
 export type PostMeta = {
   slug: string;
   title: string;
   description: string;
   publishedAt: string;
-  cover?: string;
+  author: string;
+  topics: string[];
   draft: boolean;
 };
 

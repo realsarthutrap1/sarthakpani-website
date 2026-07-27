@@ -3,18 +3,26 @@ import { siteConfig } from "@/lib/site";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-line">
-      <div className="page-shell flex flex-col gap-8 py-10 text-sm md:flex-row md:items-end md:justify-between">
-        <div>
-          <p className="font-semibold">{siteConfig.name}</p>
-          <p className="mt-2 text-muted">Building, learning, and writing in public.</p>
+    <footer className="site-footer">
+      <div className="footer-group">
+        <span className="footer-label">/ Contact</span>
+        <div className="footer-links">
+          <a href={`mailto:${siteConfig.email}`}>Email</a>
         </div>
-        <div className="flex flex-wrap gap-x-6 gap-y-3 text-muted">
-          <a className="simple-link" href={`mailto:${siteConfig.email}`}>Email</a>
-          <a className="simple-link" href={siteConfig.socials.linkedin} rel="noreferrer" target="_blank">LinkedIn</a>
-          <a className="simple-link" href={siteConfig.socials.github} rel="noreferrer" target="_blank">GitHub</a>
-          <Link className="simple-link" href="/resume">Resume</Link>
+      </div>
+      <div className="footer-group">
+        <span className="footer-label">/ Links</span>
+        <div className="footer-links">
+          <Link href="/blog">Blog</Link>
+          <Link href="/books">Books</Link>
+          <Link href="/about">About</Link>
+          <a href={siteConfig.socials.github} rel="noreferrer" target="_blank">GitHub</a>
+          <a href={siteConfig.socials.linkedin} rel="noreferrer" target="_blank">LinkedIn</a>
         </div>
+      </div>
+      <div className="footer-copyright">
+        <span>© {new Date().getFullYear()} {siteConfig.name}</span>
+        <span>California / Web</span>
       </div>
     </footer>
   );
