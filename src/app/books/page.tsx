@@ -21,26 +21,6 @@ export default function BooksPage() {
             science, economics, and company building.
           </p>
         </div>
-
-        <figure className="books-intro-photo books-intro-photo-stack">
-          <Image
-            alt="A tall stack of books from Sarthak Pani's personal shelf"
-            height={1308}
-            sizes="(max-width: 767px) 100vw, 34vw"
-            src="/books/sarthak-reading-stack.webp"
-            width={592}
-          />
-        </figure>
-
-        <figure className="books-intro-photo books-intro-photo-table">
-          <Image
-            alt="Books arranged on Sarthak Pani's reading table"
-            height={1066}
-            sizes="(max-width: 767px) 100vw, 46vw"
-            src="/books/sarthak-reading-table.webp"
-            width={1176}
-          />
-        </figure>
       </section>
 
       <section className="books-library" aria-labelledby="books-library-title">
@@ -61,16 +41,12 @@ export default function BooksPage() {
                 <span className="book-cover">
                   <Image
                     alt={`${book.title} book cover`}
-                    className={book.coverScale ? "book-cover-image is-shelf-crop" : "book-cover-image"}
+                    className="book-cover-image"
                     decoding={index < 2 ? "sync" : "async"}
                     fill
                     preload={index < 2}
                     sizes="(max-width: 539px) 46vw, (max-width: 799px) 30vw, (max-width: 1199px) 23vw, 15vw"
                     src={book.cover}
-                    style={{
-                      objectPosition: book.coverPosition,
-                      transform: book.coverScale ? `scale(${book.coverScale})` : undefined,
-                    }}
                     unoptimized
                   />
                 </span>

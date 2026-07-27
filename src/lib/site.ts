@@ -63,15 +63,6 @@ export const books: Book[] = [
     sourceUrl: "https://openlibrary.org/works/OL31446613W",
   },
   {
-    title: "The Capitalist Manifesto",
-    author: "Johan Norberg",
-    status: "read",
-    cover: "/books/sarthak-reading-stack.webp",
-    coverPosition: "50% 28%",
-    coverScale: 3.2,
-    sourceUrl: "https://openlibrary.org/works/OL730074W",
-  },
-  {
     title: "The Farewell Waltz",
     author: "Milan Kundera",
     status: "read",
@@ -142,13 +133,6 @@ export const books: Book[] = [
     sourceUrl: "https://openlibrary.org/works/OL98459W",
   },
   {
-    title: "The Bhagavad Gita",
-    author: "Eknath Easwaran, translator",
-    status: "read",
-    cover: "/books/covers/4213511.webp",
-    sourceUrl: "https://openlibrary.org/works/OL15892503W",
-  },
-  {
     title: "Naked Economics",
     author: "Charles Wheelan",
     status: "read",
@@ -203,13 +187,6 @@ export const books: Book[] = [
     status: "read",
     cover: "/books/covers/12621906.webp",
     sourceUrl: "https://openlibrary.org/works/OL267171W",
-  },
-  {
-    title: "The Ride of a Lifetime",
-    author: "Robert Iger",
-    status: "read",
-    cover: "/books/covers/8788773.webp",
-    sourceUrl: "https://openlibrary.org/works/OL20140592W",
   },
   {
     title: "Steve Jobs",
