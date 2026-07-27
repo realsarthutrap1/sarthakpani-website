@@ -577,6 +577,10 @@ a {
   letter-spacing: -0.035em;
 }
 
+.books-intro-copy strong {
+  font-weight: 500;
+}
+
 .books-library {
   grid-column: 1 / -1;
   padding-top: 56px;

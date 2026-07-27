@@ -17,8 +17,7 @@ export default function BooksPage() {
         <div className="books-intro-copy">
           <span className="table-label">/ Shelf notes</span>
           <p>
-            Books I finished, dog-eared, argued with, and kept thinking about
-            after the last page.
+            <strong>A running list of ideas I borrowed and made my own.</strong>
           </p>
         </div>
       </section>
