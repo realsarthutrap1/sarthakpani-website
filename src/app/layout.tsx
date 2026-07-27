@@ -41,13 +41,13 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: "Sarthak Pani | Blog",
     description: siteConfig.description,
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Sarthak Pani personal website" }],
+    images: [{ url: "/og-v2.png", width: 1200, height: 630, alt: "Eclipse and orbital paths" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Sarthak Pani | Blog",
     description: siteConfig.description,
-    images: ["/og.png"],
+    images: ["/og-v2.png"],
   },
 };
 
