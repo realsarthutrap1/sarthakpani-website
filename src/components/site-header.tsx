@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const links = [
   ["Blog", "/blog", "B"],
@@ -23,6 +24,7 @@ export function SiteHeader() {
           </Link>
         );
       })}
+      <ThemeToggle />
     </nav>
   );
 }

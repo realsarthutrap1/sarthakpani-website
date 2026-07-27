@@ -54,10 +54,19 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
+      suppressHydrationWarning
       data-scroll-behavior="smooth"
       lang="en"
       className={`${geist.variable} ${geistMono.variable} ${newsreader.variable}`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              'try{document.documentElement.dataset.theme=localStorage.getItem("theme")||"dark"}catch{}',
+          }}
+        />
+      </head>
       <body>
         <a className="skip-link" href="#main-content">Skip to content</a>
         <PointerCrosshair />
