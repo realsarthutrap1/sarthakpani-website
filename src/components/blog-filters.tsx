@@ -33,7 +33,7 @@ export function BlogFilters({
             type="button"
           >
             <span aria-hidden className="directory-chevron">⌄</span>
-            <span aria-hidden className="folder-mark" />
+            <span aria-hidden className="topic-mark">✦</span>
             <span>Topic</span>
           </button>
           <div className="directory-content" hidden={!open}>
