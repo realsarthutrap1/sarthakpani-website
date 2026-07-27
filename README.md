@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SarthakPani.com
 
-## Getting Started
+Personal portfolio and publishing site for Sarthak Pani.
 
-First, run the development server:
+## Local development
+
+Use Node 24 or newer.
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Before pushing:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run typecheck
+npm run build
+```
 
-## Learn More
+## Editing the site
 
-To learn more about Next.js, take a look at the following resources:
+- Projects live in `content/projects/*.mdx`.
+- Essays live in `content/writing/*.mdx`.
+- Reading entries and current focus items live in `src/lib/site.ts`.
+- Static images live in `public/images`.
+- The public resume lives at `public/resume/sarthak-pani-resume.pdf`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Project frontmatter requires:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```yaml
+title: "Project title"
+summary: "One sentence summary"
+year: "2026"
+status: "Active"
+tags:
+  - "TypeScript"
+cover: "/images/project.png"
+coverAlt: "Useful image description"
+featured: true
+draft: false
+links: []
+```
 
-## Deploy on Vercel
+Writing frontmatter requires:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```yaml
+title: "Essay title"
+description: "One sentence description"
+publishedAt: "2026-07-26"
+draft: false
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Set `draft: true` to keep an entry out of the build.
+
+## Deployment
+
+The production branch is `main`. Vercel builds the site after every push, and
+other branches receive preview deployments.
+
+The canonical domain is `sarthakpani.com`. GoDaddy continues to manage the
+domain and DNS. When changing DNS, preserve all email-related MX and TXT
+records.
