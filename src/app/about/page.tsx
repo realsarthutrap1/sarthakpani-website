@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { SectionTitle } from "@/components/section-title";
 import { siteConfig } from "@/lib/site";
 
@@ -15,6 +16,14 @@ export default function AboutPage() {
         <aside className="about-index">
           <div className="filter-block">
             <div className="table-label"><span>/</span> Profile</div>
+          </div>
+          <div className="about-photo">
+            <Image
+              alt="Sarthak Pani speaking at a Google Developer Group event"
+              height={551}
+              src="/about/sarthak-speaking.jpeg"
+              width={502}
+            />
           </div>
         </aside>
         <div className="about-content">

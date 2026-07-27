@@ -787,6 +787,20 @@ a {
   border-top: 0.5px solid var(--muted);
 }
 
+.about-photo {
+  width: min(260px, 80%);
+  margin-top: 18px;
+  overflow: hidden;
+  border: 0.5px solid color-mix(in srgb, var(--muted) 55%, transparent);
+  border-radius: 2px;
+}
+
+.about-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .about-row {
   display: grid;
   gap: 6px;
