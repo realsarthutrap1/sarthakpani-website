@@ -10,7 +10,12 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  const posts = getPosts();
+  const visible = new Set([
+    "why-this-site-exists",
+    "devfest-central-valley-startup-journey",
+    "wake-up-alarm",
+  ]);
+  const posts = getPosts().filter((post) => visible.has(post.slug));
 
   return (
     <main className="site-grid">
