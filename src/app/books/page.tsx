@@ -32,7 +32,7 @@ export default function BooksPage() {
                         <span aria-hidden className="date-square" />
                         {book.status}
                       </span>
-                      <span className="blog-row-title">{book.title} — {book.author}</span>
+                      <span className="blog-row-title">{book.title} / {book.author}</span>
                     </div>
                   </div>
                 </li>
