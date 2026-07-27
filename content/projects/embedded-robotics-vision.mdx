@@ -1,0 +1,40 @@
+---
+title: "Embedded Robotics and Vision"
+summary: "A physical computing platform connecting an ESP32, Raspberry Pi, motor control, networking, and live camera feedback."
+year: "2026"
+status: "Prototype"
+tags:
+  - "ESP32"
+  - "Raspberry Pi"
+  - "C++"
+  - "PlatformIO"
+  - "UDP"
+cover: "/images/robotics-vision.webp"
+coverAlt: "Editorial photograph of an embedded robotics camera and circuit board"
+featured: true
+draft: false
+links: []
+---
+
+## From command to motion
+
+This prototype connected an ESP32 and Raspberry Pi over a Wi-Fi and UDP control
+link. The embedded side handled L298N motor driving and PWM-based motion
+control, while the browser-facing side exposed live camera feedback and image
+controls.
+
+## What it taught me
+
+Physical systems force software assumptions into the open. Latency becomes
+visible. Timing matters. A small inconsistency in power, networking, or motor
+control can become the entire behavior of the machine.
+
+The project strengthened my understanding of:
+
+- Embedded networking and message design
+- PWM motor control
+- Camera streaming on constrained hardware
+- Debugging across hardware, firmware, and browser boundaries
+
+It also reinforced a broader principle: useful intelligence needs a reliable
+way to sense and act in the world.
