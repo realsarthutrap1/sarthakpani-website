@@ -1,18 +1,20 @@
 "use client";
 
+export function setTheme(theme: "dark" | "light") {
+  document.documentElement.dataset.theme = theme;
+  try {
+    localStorage.setItem("theme", theme);
+  } catch {}
+}
+
 export function ThemeToggle() {
   const toggleTheme = () => {
-    const root = document.documentElement;
-      const theme = root.dataset.theme === "light" ? "dark" : "light";
-
-      root.dataset.theme = theme;
-      try {
-        localStorage.setItem("theme", theme);
-      } catch {}
-    };
+    setTheme(document.documentElement.dataset.theme === "light" ? "dark" : "light");
+  };
 
   return (
     <button
+      aria-keyshortcuts="L D"
       aria-label="Toggle light and dark mode"
       className="nav-link theme-toggle"
       onClick={toggleTheme}
