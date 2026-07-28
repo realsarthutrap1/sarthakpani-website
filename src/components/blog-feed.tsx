@@ -83,6 +83,7 @@ export function BlogFeed({
           {posts.map((post) => {
             const open = expanded === post.slug;
             const detailsId = post.live ? `details-${post.slug}` : "coming-soon-dialog";
+            const postPath = `/blog/${encodeURIComponent(post.slug)}`;
             const rowContent = (
               <>
                 <span className="blog-date">
@@ -102,7 +103,7 @@ export function BlogFeed({
               >
                 <div className="blog-row-visible">
                   {post.live ? (
-                    <Link className="blog-row-link" href={`/blog/${post.slug}`}>{rowContent}</Link>
+                    <Link className="blog-row-link" href={postPath}>{rowContent}</Link>
                   ) : (
                     <button
                       aria-controls={detailsId}
@@ -148,7 +149,7 @@ export function BlogFeed({
                         ))}
                       </ul>
                     </div>
-                    <Link className="read-link" href={`/blog/${post.slug}`}>Read</Link>
+                    <Link className="read-link" href={postPath}>Read</Link>
                   </div>
                 ) : null}
               </li>

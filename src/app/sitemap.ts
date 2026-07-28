@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date("2026-07-26"),
     })),
     ...getPosts().filter((post) => post.live).map((post) => ({
-      url: `${siteConfig.url}/blog/${post.slug}`,
+      url: `${siteConfig.url}/blog/${encodeURIComponent(post.slug)}`,
       lastModified: new Date(post.publishedAt),
     })),
   ];

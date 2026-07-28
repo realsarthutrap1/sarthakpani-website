@@ -10,6 +10,14 @@ function filesIn(directory: "blog") {
   return fs.existsSync(target) ? fs.readdirSync(target).filter((file) => file.endsWith(".mdx")) : [];
 }
 
+function contentSlug(file: string) {
+  const slug = file.replace(/\.mdx$/, "");
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+    throw new Error(`${file}: filename must contain only lowercase letters, numbers, and hyphens`);
+  }
+  return slug;
+}
+
 function requiredString(data: Record<string, unknown>, key: string, file: string) {
   const value = data[key];
   if (typeof value !== "string" || !value.trim()) {
@@ -50,7 +58,7 @@ function postOrder(data: Record<string, unknown>, file: string) {
 export function getPosts(): PostMeta[] {
   return filesIn("blog")
     .map((file) => {
-      const slug = file.replace(/\.mdx$/, "");
+      const slug = contentSlug(file);
       const { data } = matter.read(path.join(contentRoot, "blog", file));
       const record = data as Record<string, unknown>;
       const order = postOrder(record, file);
