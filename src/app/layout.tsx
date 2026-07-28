@@ -73,7 +73,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <SiteHeader />
         <div id="main-content">{children}</div>
         <SiteFooter />
-        {process.env.VERCEL ? <Analytics /> : null}
+        <Analytics />
       </body>
     </html>
   );

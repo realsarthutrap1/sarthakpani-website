@@ -10,6 +10,7 @@ export function SiteFooter() {
           <Link href="/blog">Blog</Link>
           <Link href="/books">Books</Link>
           <Link href="/about">About</Link>
+          <Link href="/privacy">Privacy</Link>
           <a href={siteConfig.socials.github} rel="noreferrer" target="_blank">GitHub</a>
           <a href={siteConfig.socials.linkedin} rel="noreferrer" target="_blank">LinkedIn</a>
         </div>
