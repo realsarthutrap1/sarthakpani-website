@@ -46,11 +46,18 @@ export default function AboutPage() {
             </div>
           </dl>
           <div className="about-copy">
-            <h2>A touch of verisimilitude.</h2>
-            <p>I build software, hardware, and occasionally better questions.</p>
+            <h2>Difficult to compress.</h2>
             <p>
-              I’m currently studying physics, co-founding Elev, experimenting with computer vision
-              and embedded systems, and collecting books that change how I think.
+              Founder, engineer, and physics student are useful approximations.
+            </p>
+            <p>
+              The longer version involves building Elev, studying physical systems, wiring hardware,
+              writing software, reading books, and following questions that refuse to remain in one
+              field.
+            </p>
+            <p>
+              This site is the longer version: projects, essays, experiments, books, and unfinished
+              ideas kept together before professional compression turns them into a clean story.
             </p>
           </div>
         </div>
