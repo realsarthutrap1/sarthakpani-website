@@ -1017,6 +1017,30 @@ a {
   line-height: 1.4;
 }
 
+.article-video {
+  overflow: hidden;
+  border: 1px solid var(--nav);
+  background: #000;
+}
+
+.article-video video {
+  display: block;
+  width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+}
+
+.article-video figcaption {
+  margin: 0;
+  background: var(--nav);
+  color: var(--muted);
+  padding: 10px 12px;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
 .site-footer {
   display: grid;
   width: calc(100% - 24px);

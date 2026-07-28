@@ -10,6 +10,17 @@ function MediaPlaceholder({ kind, label }: { kind: "Photo" | "Video"; label: str
   );
 }
 
+function ArticleVideo({ label, poster, src }: { label: string; poster: string; src: string }) {
+  return (
+    <figure className="article-video">
+      <video aria-label={label} controls playsInline poster={poster} preload="metadata">
+        <source src={src} type="video/mp4" />
+      </video>
+      <figcaption>{label}</figcaption>
+    </figure>
+  );
+}
+
 const components = {
   a: (props: ComponentPropsWithoutRef<"a">) => {
     const external = typeof props.href === "string" && props.href.startsWith("http");
@@ -22,6 +33,7 @@ const components = {
   li: (props: ComponentPropsWithoutRef<"li">) => <li {...props} />,
   blockquote: (props: ComponentPropsWithoutRef<"blockquote">) => <blockquote {...props} />,
   code: (props: ComponentPropsWithoutRef<"code">) => <code {...props} />,
+  ArticleVideo,
   MediaPlaceholder,
 };
 
