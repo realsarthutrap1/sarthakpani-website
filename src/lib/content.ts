@@ -63,7 +63,7 @@ export function getPosts(): PostMeta[] {
         topics: stringArray(record, "topics", file),
         draft: record.draft === true,
         order,
-        live: order === 1,
+        live: record.live === true || order === 1,
       };
     })
     .filter((post) => !post.draft)

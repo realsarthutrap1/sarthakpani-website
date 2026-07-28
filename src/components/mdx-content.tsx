@@ -1,6 +1,15 @@
 import type { ComponentPropsWithoutRef } from "react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 
+function MediaPlaceholder({ kind, label }: { kind: "Photo" | "Video"; label: string }) {
+  return (
+    <figure className="media-placeholder">
+      <span>{kind}</span>
+      <figcaption>{label}</figcaption>
+    </figure>
+  );
+}
+
 const components = {
   a: (props: ComponentPropsWithoutRef<"a">) => {
     const external = typeof props.href === "string" && props.href.startsWith("http");
@@ -13,6 +22,7 @@ const components = {
   li: (props: ComponentPropsWithoutRef<"li">) => <li {...props} />,
   blockquote: (props: ComponentPropsWithoutRef<"blockquote">) => <blockquote {...props} />,
   code: (props: ComponentPropsWithoutRef<"code">) => <code {...props} />,
+  MediaPlaceholder,
 };
 
 export function MdxContent({ source }: { source: string }) {

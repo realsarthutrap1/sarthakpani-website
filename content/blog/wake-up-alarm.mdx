@@ -1,31 +1,192 @@
 ---
 title: "A Very Unconventional Alarm Clock"
-description: "A personal hardware project about designing a wake-up system that changes the morning instead of merely making noise."
+description: "Three versions of an increasingly unreasonable system for getting me out of bed."
 publishedAt: "2026-07-27"
 author: "Sarthak Pani"
 order: 5
 topics:
   - "Hardware"
+  - "Embedded Systems"
   - "Product"
   - "Personal"
 draft: false
+live: true
 ---
 
 ## The real bug is the morning
 
-Most alarms solve the narrow problem of producing sound at a certain time. The
-person who set the alarm still has to become awake, make a decision, and start
-moving.
+Waking up is not always difficult. Eh, maybe I’m lying.
 
-I want to build a personal wake-up alarm that treats the morning as a system:
-light, sound, motion, friction, and a small amount of accountability working
-together.
+I guess what I mean is that if I am looking forward to something, it is
+substantially easier. More often than not, however, there is work to be done.
+Regardless of whether I hate the idea of doing it, the work remains
+inconveniently existent.
 
-## The design question
+Thanks to Steve Jobs’s revolutionary vision, I own an iPhone. More accurately,
+thanks to my mom and dad, who financed it. Serendipitously, one of its base
+features is an alarm clock. Man, is it awesome.
 
-How much intervention is useful before the device becomes annoying enough to
-defeat itself?
+Awesomely inconsistent. But that is likely less an indictment of Apple and more
+an indictment of the person who keeps turning it off.
 
-That makes this a hardware project and a product project at the same time. The
-interesting part is not adding more features. It is finding the smallest loop
-that reliably changes what happens after the alarm rings.
+So there must be a better alternative to waking up. Cretinously, I decided to
+be performative, purchasing a poster about discipline.
+
+Boy, does it look great on my wall. I hung it up, admired my improved character,
+plopped back into bed, and woke up around 10:00 a.m. the next morning.
+
+I think it’s safe to assume the poster didn’t help, although the Amazon reviews
+were overall positive.
+
+I guess the consensus I arrived at was that most alarms make noise. They also
+expect the person in bed to cooperate.
+
+I needed an alarm with an escalation policy.
+
+## Version 1: Salvaging the blaster
+
+Around this time, I was reading two books I would recommend to anyone interested
+in electronics: *The Art of Electronics* and *Practical Electronics for
+Inventors*. Credit for the second recommendation goes to my dad.
+
+I was also rummaging through electronics he had stored in the garage, searching
+for parts.
+
+That is where I found an old gel blaster.
+
+A few neurons fired in an orthogonal direction. Minutes later, the blaster was
+in my room and in pieces.
+
+Inside, I found a 3.7V 2200mAh battery, several switches, a small brushed DC
+motor, and the original feeding and firing mechanisms. I removed most of the
+control electronics, reducing the blaster just enough to drive the motor.
+Whether the remaining mechanism still worked was unresolved.
+
+To validate it, I used an L298N motor driver. The L298N is inexpensive,
+convenient, and a remarkably effective miniature hand warmer. For this
+prototype, it was sufficient.
+
+About 10 minutes later, the motor spun.
+
+I promise I am not a masochist. Yet I found myself strangely excited to test a
+machine whose purpose was to shoot its creator. The excitement was brief.
+
+The motor and firing mechanism worked, but the original cartridge could no
+longer feed gel rounds consistently into the chamber. And so a new mechanical
+constraint was introduced.
+
+Repairing the cartridge would likely mean reconstructing its internal feeding
+mechanism. Worse, designing a replacement in CAD. To avoid exacerbating the
+situation, I inverted the blaster and converted it into a gravity-fed system. A
+pink plastic boba straw constrained the ammo above the chamber, while Gorilla
+Glue fixed the guide in position.
+
+The assembly was crude, but the rounds fed consistently.
+
+Newton spared me from opening CAD.
+
+<MediaPlaceholder kind="Photo" label="The blaster opened on the workbench, showing the battery, motor, and stripped mechanism." />
+
+<MediaPlaceholder kind="Video" label="The first successful manually controlled firing test." />
+
+Version 1 proved that the mechanical system still worked. What it could not do
+was wake me up by itself.
+
+For that, the blaster needed a clock, a network, and considerably worse
+judgment.
+
+## Version 2: Giving the alarm a brain
+
+Version 2 turned the mechanical prototype into a distributed alarm.
+
+The basic chain looked like this:
+
+> Cron schedule → Raspberry Pi → RF-controlled outlet → ESP32 → UDP instruction
+> and local countdown → MOSFET switch → gel blaster
+
+### For nontechnical readers
+
+The objective is relatively straightforward. Remove what I did not need, keep
+the motor and firing mechanism, and make the remaining components controllable.
+
+### For my technical readers
+
+The Raspberry Pi owned the schedule, but it controlled the system’s power
+indirectly. I connected an FS1000A transmitter and RX470C receiver through its
+GPIO pins, then soldered on makeshift antennas salvaged from old RC-car parts.
+
+The modules operated at 433 MHz. I used the receiver to capture the wireless
+outlet remote’s on-and-off pulse patterns. I replayed those codes through the
+FS1000A so the Pi could control the outlet.
+
+That RF connection was one-way, however. The Pi could transmit an instruction
+but received no confirmation that the outlet had switched. My original
+implementation sent the 433 MHz command, waited for an interval, then
+transmitted an activation command over UDP.
+
+If the outlet failed to turn on, or the ESP32 was still booting and joining
+Wi-Fi, the packet disappeared.
+
+The simple fix was separating orchestration from actuation.
+
+The Pi initiated the outlet sequence early, giving the ESP32 time to power on
+and join Wi-Fi. Once the UDP command arrived, the ESP32 owned the final
+countdown and triggered the XY-MOS locally.
+
+Not every nail requires a nail gun. The ESP32 was the hammer closest to the
+nail.
+
+The XY-MOS also replaced the L298N. Because the motor only rotated in one
+direction, the dual H-bridge contributed unnecessary voltage loss and heat.
+
+The Pi served the scheduling interface over my private Tailscale network. To
+prevent half-asleep shutdowns, the system generated a random shutdown
+credential each night, stored only its SHA-256 hash, and discarded the
+plaintext value.
+
+<MediaPlaceholder kind="Photo" label="ESP32 and the earlier L298N prototype attached to the salvaged blaster." />
+
+<MediaPlaceholder kind="Photo" label="Raspberry Pi and the early radio-frequency experiments." />
+
+<MediaPlaceholder kind="Video" label="The scheduled Raspberry Pi command activates the alarm." />
+
+After the timing change, it worked.
+
+On multiple mornings, the outlet powered on, the ESP32 booted, the packet
+arrived, the countdown expired, and the blaster fired.
+
+And I woke up. Oh boy, did I wake up.
+
+In fact, I eventually started waking up early just to unplug the outlet before
+the sequence began.
+
+Self-inflicted? Entirely.
+
+Unconventional? Definitely.
+
+Did it work? Absolutely.
+
+## Version 3: An unlicensed defense contractor
+
+Version 3 is still being implemented, and the first major change is mechanical.
+
+I have been working with 3D printing and built a planetary gearbox around a
+NEMA 17 stepper motor. The gearbox is part of a rotating platform for the next
+version of the system.
+
+<MediaPlaceholder kind="Video" label="Planetary gearbox and NEMA 17 movement test. A photo can be used here instead." />
+
+If you are looking at that mechanism and thinking what I am thinking, you can
+probably infer the direction. Version 1 made the blaster fire. Version 2 made it
+fire on a schedule. Version 3 asks what happens when the system can turn,
+observe, and coordinate more than one device.
+
+The longer-term plan includes a Raspberry Pi control layer, private connectivity
+through Tailscale, DNS-level controls, several locally processed camera views,
+and physical outputs that can interrupt me when I am not doing what I said I
+would do.
+
+At some point, an alarm clock becomes an autonomous systems project. Version 3
+is where I gleefully appear to be crossing that line.
+
+For now, consider this the sneak peek.
