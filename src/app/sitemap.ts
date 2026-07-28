@@ -3,7 +3,7 @@ import { getPosts } from "@/lib/content";
 import { siteConfig } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ["/blog", "/books", "/about"];
+  const routes = ["/blog", "/books", "/about", "/privacy"];
   return [
     ...routes.map((route) => ({
       url: `${siteConfig.url}${route}`,
