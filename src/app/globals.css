@@ -859,6 +859,17 @@ a {
   padding-block: 34px 60px;
 }
 
+.about-copy h2 {
+  max-width: 20ch;
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-newsreader), Georgia, serif;
+  font-size: clamp(30px, 3vw, 44px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
 .about-copy p {
   max-width: 55ch;
   margin: 0;
