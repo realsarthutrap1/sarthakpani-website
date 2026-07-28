@@ -11,6 +11,7 @@ export type PostMeta = {
 };
 
 export type Book = {
+  id?: string;
   title: string;
   author: string;
   status: "reading" | "read" | "paused";

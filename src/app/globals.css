@@ -1043,6 +1043,17 @@ a {
   text-transform: uppercase;
 }
 
+.article-image {
+  width: min(100%, 640px);
+  margin-inline: auto;
+}
+
+.article-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .photo-carousel {
   width: min(100%, 640px);
   margin-inline: auto;
@@ -1077,6 +1088,7 @@ a {
   height: auto;
 }
 
+.article-image figcaption,
 .photo-carousel figcaption {
   margin-top: 8px;
   color: var(--muted);

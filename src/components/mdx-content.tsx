@@ -22,6 +22,27 @@ function ArticleVideo({ label, poster, src }: { label: string; poster: string; s
   );
 }
 
+function ArticleImage({
+  alt,
+  caption,
+  height,
+  src,
+  width,
+}: {
+  alt: string;
+  caption: string;
+  height: number;
+  src: string;
+  width: number;
+}) {
+  return (
+    <figure className="article-image">
+      <Image alt={alt} height={height} sizes="(max-width: 760px) 100vw, 640px" src={src} width={width} />
+      <figcaption>{caption}</figcaption>
+    </figure>
+  );
+}
+
 const photoGalleries = {
   version1: [
     {
@@ -82,6 +103,7 @@ const components = {
   li: (props: ComponentPropsWithoutRef<"li">) => <li {...props} />,
   blockquote: (props: ComponentPropsWithoutRef<"blockquote">) => <blockquote {...props} />,
   code: (props: ComponentPropsWithoutRef<"code">) => <code {...props} />,
+  ArticleImage,
   ArticleVideo,
   MediaPlaceholder,
   PhotoCarousel,

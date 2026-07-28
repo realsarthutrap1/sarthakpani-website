@@ -300,4 +300,20 @@ export const books: Book[] = [
     cover: "/books/covers/8315603.webp",
     sourceUrl: "https://openlibrary.org/works/OL2010879W",
   },
+  {
+    id: "the-art-of-electronics",
+    title: "The Art of Electronics",
+    author: "Paul Horowitz and Winfield Hill",
+    status: "read",
+    cover: "/books/covers/art-of-electronics.jpg",
+    sourceUrl: "https://openlibrary.org/works/OL4770496W",
+  },
+  {
+    id: "practical-electronics-for-inventors",
+    title: "Practical Electronics for Inventors",
+    author: "Paul Scherz",
+    status: "read",
+    cover: "/books/covers/practical-electronics-for-inventors.jpg",
+    sourceUrl: "https://openlibrary.org/books/OL27097060M/Practical_electronics_for_inventors",
+  },
 ];

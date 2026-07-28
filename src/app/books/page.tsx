@@ -30,7 +30,7 @@ export default function BooksPage() {
 
         <ul className="book-grid">
           {books.map((book, index) => (
-            <li key={`${book.title}-${book.author}`}>
+            <li id={book.id} key={`${book.title}-${book.author}`}>
               <a
                 className="book-card"
                 href={book.sourceUrl}
