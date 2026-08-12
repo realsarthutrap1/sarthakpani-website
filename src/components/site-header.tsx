@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { LanguageMenu } from "@/components/language-menu";
 import { setTheme, ThemeToggle } from "@/components/theme-toggle";
 
 const links = [
@@ -30,6 +31,10 @@ export function SiteHeader() {
       const key = event.key.toLowerCase();
       const route = { a: "/about", b: "/blog", k: "/books" }[key];
       if (route) router.push(route);
+      if (key === "g") {
+        const menu = document.querySelector<HTMLDetailsElement>("#language-menu");
+        if (menu) menu.open = !menu.open;
+      }
       if (key === "l" || key === "d") setTheme(key === "l" ? "light" : "dark");
     };
 
@@ -54,6 +59,7 @@ export function SiteHeader() {
           </Link>
         );
       })}
+      <LanguageMenu />
       <ThemeToggle />
     </nav>
   );
