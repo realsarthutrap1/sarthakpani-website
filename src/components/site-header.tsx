@@ -31,10 +31,7 @@ export function SiteHeader() {
       const key = event.key.toLowerCase();
       const route = { a: "/about", b: "/blog", k: "/books" }[key];
       if (route) router.push(route);
-      if (key === "g") {
-        const menu = document.querySelector<HTMLDetailsElement>("#language-menu");
-        if (menu) menu.open = !menu.open;
-      }
+      if (key === "g") document.querySelector<HTMLButtonElement>("#language-menu-trigger")?.click();
       if (key === "l" || key === "d") setTheme(key === "l" ? "light" : "dark");
     };
 
