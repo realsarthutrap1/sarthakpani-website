@@ -46,7 +46,6 @@ export default function AboutPage() {
             </div>
           </dl>
           <div className="about-copy">
-            <h2>Difficult to compress.</h2>
             <p>
               Founder, engineer, and physics student are useful approximations.
             </p>
@@ -56,8 +55,8 @@ export default function AboutPage() {
               field.
             </p>
             <p>
-              This site is the longer version: projects, essays, experiments, books, and unfinished
-              ideas kept together before professional compression turns them into a clean story.
+              This site collects projects, essays, experiments, books, and unfinished ideas in one
+              place.
             </p>
           </div>
         </div>
