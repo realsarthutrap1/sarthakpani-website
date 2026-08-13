@@ -73,14 +73,18 @@ export function LanguageMenu() {
   "status": 200,
   "message": "Choose a language"
 }`}</code></pre>
-            <div aria-label="Available languages" className="language-options">
+            <div
+              aria-label="Available languages"
+              className="language-options notranslate"
+              translate="no"
+            >
               <Link className="language-option" href={pathname} hrefLang="en" lang="en">
                 <span>English</span><span>Original</span>
               </Link>
               {languages.map(([nativeName, englishName, code]) => (
                 <a
                   className="language-option"
-                  href={`https://translate.google.com/translate?sl=en&tl=${code}&u=${encodeURIComponent(sourceUrl)}`}
+                  href={`https://translate.google.com/website?sl=en&tl=${code}&hl=en-US&u=${encodeURIComponent(sourceUrl)}`}
                   hrefLang={code}
                   key={code}
                   lang={code}
