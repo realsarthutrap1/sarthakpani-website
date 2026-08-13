@@ -17,7 +17,6 @@ export function LanguageMenu() {
   const dialog = useRef<HTMLDialogElement>(null);
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const sourceUrl = `https://sarthakpani.com${pathname}`;
 
   const showDialog = () => {
     if (dialog.current && !dialog.current.open) {
@@ -84,7 +83,7 @@ export function LanguageMenu() {
               {languages.map(([nativeName, englishName, code]) => (
                 <a
                   className="language-option"
-                  href={`https://translate.google.com/website?sl=en&tl=${code}&hl=en-US&u=${encodeURIComponent(sourceUrl)}`}
+                  href={`https://sarthakpani-com.translate.goog${pathname}?_x_tr_sl=en&_x_tr_tl=${code}&_x_tr_hl=en-US`}
                   hrefLang={code}
                   key={code}
                   lang={code}
